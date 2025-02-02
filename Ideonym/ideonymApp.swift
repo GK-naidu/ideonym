@@ -11,7 +11,7 @@ import SwiftUI
 struct ideonymApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            IdeaInputView()
         }
     }
 }

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F08BE0372D4F4DA800CB0714 /* ideonymApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BE0362D4F4DA800CB0714 /* ideonymApp.swift */; };
+		F08BE03B2D4F4DAA00CB0714 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F08BE0442D4F4DAB00CB0714 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,16 +30,13 @@
 
 /* Begin PBXFileReference section */
 		F08BE0332D4F4DA800CB0714 /* ideonym.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ideonym.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F08BE0362D4F4DA800CB0714 /* ideonymApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ideonymApp.swift; sourceTree = "<group>"; };
+		F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F08BE0432D4F4DAB00CB0714 /* ideonymTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08BE04D2D4F4DAB00CB0714 /* ideonymUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F08BE0352D4F4DA800CB0714 /* ideonym */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ideonym;
-			sourceTree = "<group>";
-		};
 		F08BE0462D4F4DAB00CB0714 /* ideonymTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ideonymTests;
@@ -43,6 +45,31 @@
 		F08BE0502D4F4DAB00CB0714 /* ideonymUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ideonymUITests;
+			sourceTree = "<group>";
+		};
+		F08BE0622D4F4E7200CB0714 /* View Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		F08BE0632D4F4E7600CB0714 /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F08BE0652D4F4E8500CB0714 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F08BE0792D4F589C00CB0714 /* Preview Content */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F08BE07D2D4F595D00CB0714 /* components */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = components;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +102,7 @@
 		F08BE02A2D4F4DA800CB0714 = {
 			isa = PBXGroup;
 			children = (
-				F08BE0352D4F4DA800CB0714 /* ideonym */,
+				F08BE07B2D4F590100CB0714 /* Ideonym */,
 				F08BE0462D4F4DAB00CB0714 /* ideonymTests */,
 				F08BE0502D4F4DAB00CB0714 /* ideonymUITests */,
 				F08BE0342D4F4DA800CB0714 /* Products */,
@@ -90,6 +117,20 @@
 				F08BE04D2D4F4DAB00CB0714 /* ideonymUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F08BE07B2D4F590100CB0714 /* Ideonym */ = {
+			isa = PBXGroup;
+			children = (
+				F08BE0652D4F4E8500CB0714 /* Views */,
+				F08BE0632D4F4E7600CB0714 /* Models */,
+				F08BE0622D4F4E7200CB0714 /* View Models */,
+				F08BE0792D4F589C00CB0714 /* Preview Content */,
+				F08BE07D2D4F595D00CB0714 /* components */,
+				F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */,
+				F08BE0362D4F4DA800CB0714 /* ideonymApp.swift */,
+			);
+			path = Ideonym;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,7 +149,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F08BE0352D4F4DA800CB0714 /* ideonym */,
+				F08BE0622D4F4E7200CB0714 /* View Models */,
+				F08BE0632D4F4E7600CB0714 /* Models */,
+				F08BE0652D4F4E8500CB0714 /* Views */,
+				F08BE0792D4F589C00CB0714 /* Preview Content */,
+				F08BE07D2D4F595D00CB0714 /* components */,
 			);
 			name = ideonym;
 			packageProductDependencies = (
@@ -212,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F08BE03B2D4F4DAA00CB0714 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F08BE0372D4F4DA800CB0714 /* ideonymApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
