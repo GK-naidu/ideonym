@@ -38,7 +38,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F08BE10F2D522A7A00CB0714 /* Exceptions for "Views" folder in "ideonym" target */ = {
+		F08BE1102D522D6D00CB0714 /* Exceptions for "Views" folder in "ideonym" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -48,16 +48,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F08BE0462D4F4DAB00CB0714 /* ideonymTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ideonymTests;
-			sourceTree = "<group>";
-		};
-		F08BE0502D4F4DAB00CB0714 /* ideonymUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ideonymUITests;
-			sourceTree = "<group>";
-		};
 		F08BE0622D4F4E7200CB0714 /* View Models */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "View Models";
@@ -81,7 +71,7 @@
 		F08BE08C2D4FBE8C00CB0714 /* Views */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				F08BE10F2D522A7A00CB0714 /* Exceptions for "Views" folder in "ideonym" target */,
+				F08BE1102D522D6D00CB0714 /* Exceptions for "Views" folder in "ideonym" target */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -117,8 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				F08BE07B2D4F590100CB0714 /* Ideonym */,
-				F08BE0462D4F4DAB00CB0714 /* ideonymTests */,
-				F08BE0502D4F4DAB00CB0714 /* ideonymUITests */,
 				F08BE0342D4F4DA800CB0714 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -190,9 +178,6 @@
 			dependencies = (
 				F08BE0452D4F4DAB00CB0714 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				F08BE0462D4F4DAB00CB0714 /* ideonymTests */,
-			);
 			name = ideonymTests;
 			packageProductDependencies = (
 			);
@@ -212,9 +197,6 @@
 			);
 			dependencies = (
 				F08BE04F2D4F4DAB00CB0714 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F08BE0502D4F4DAB00CB0714 /* ideonymUITests */,
 			);
 			name = ideonymUITests;
 			packageProductDependencies = (
