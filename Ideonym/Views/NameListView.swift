@@ -4,67 +4,61 @@
 //
 //  Created by GK Naidu on 02/02/25.
 //
-
 import SwiftUI
 
 struct NameListView: View {
-    @ObservedObject var viewModel: NameViewModel
+    @ObservedObject var viewModel: BusinessNameViewModel
+
     var body: some View {
-        NavigationView {
-            VStack {
-                if viewModel.isLoading {
-                    ProgressView("Fetching Names...")
+        VStack {
+            if viewModel.isLoading {
+                ProgressView("Generating...")
+                    .foregroundColor(.white)
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .multilineTextAlignment(.center)
+            } else {
+                ScrollView {
+                    ForEach(viewModel.generatedNames) { name in
+                        VStack(alignment: .leading) {
+                            Text(name.name)
+                                .font(.title3)
+                                .bold()
+                                .foregroundColor(.white)
+                            Text(name.tagline)
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                         .padding()
-                } else {
-                    List(viewModel.businessNames) { name in
-                        BusinessNameRow(name: name)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(12)
+                        .padding(.horizontal)
                     }
-                    .listStyle(PlainListStyle())
                 }
             }
-            .navigationTitle("Generated Names")
-            .task {
-                await viewModel.fetchBusinessNames()
+
+            Button(action: {
+                viewModel.isLoading = true
+                viewModel.generateBusinessNames {
+                    DispatchQueue.main.async {
+                        viewModel.isLoading = false // Hide progress after fetching names
+                    }
+                }
+            }) {
+                Text("Generate Again")
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(12)
+                    .foregroundColor(.white)
+                    .padding()
             }
         }
-    }
-}
-
-// MARK: - Private Row View
-private struct BusinessNameRow: View {
-    let name: BusinessName
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(name.name)
-                .font(.headline)
-            
-            HStack {
-                SocialMediaAvailabilityView(platform: "Twitter", isAvailable: name.availability.socialMedia.twitter)
-                SocialMediaAvailabilityView(platform: "YouTube", isAvailable: name.availability.socialMedia.youtube)
-                SocialMediaAvailabilityView(platform: "Instagram", isAvailable: name.availability.socialMedia.instagram)
-            }
-        }
-        .padding(.vertical, 5)
-    }
-}
-
-// MARK: - Private Social Media Status View
-private struct SocialMediaAvailabilityView: View {
-    let platform: String
-    let isAvailable: Bool
-
-    var body: some View {
-        HStack {
-            Image(systemName: isAvailable ? "checkmark.circle.fill" : "xmark.circle.fill")
-                .foregroundColor(isAvailable ? .green : .red)
-            Text(platform)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-        }
+        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }
 }
 
 #Preview {
-    NameListView(viewModel: NameViewModel())
+    NameListView(viewModel: BusinessNameViewModel())
 }

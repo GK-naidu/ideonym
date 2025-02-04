@@ -8,95 +8,52 @@
 import SwiftUI
 
 struct IdeaInputView: View {
-    @State private var businessIdea: String = ""
-    @State private var isLoading: Bool = false
-    @State private var navigateToResults: Bool = false
-    @StateObject private var viewModel = NameViewModel()
+    @ObservedObject var viewModel: BusinessNameViewModel
     
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading) {
-                
-                // MARK: - Title
-                Text("Enter Your Idea")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.top, 20)
-                    .padding(.horizontal)
-                
-                // MARK: - TextField Input
-                IdeaTextField(text: $businessIdea)
-                    .padding(.horizontal)
-                
-                // MARK: - Generate Button or ProgressView
-                if isLoading {
-                    LoadingIndicator()
-                } else {
-                    GenerateButton(action: {
-                        Task {
-                            await generateNames()
-                        }
-                    })
+        VStack {
+            Text("Enter Your Business Idea")
+                .font(.title2)
+                .foregroundColor(.white)
+            
+            TextField("Your idea...", text: $viewModel.idea)
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(10)
+                .foregroundColor(.white)
+                .padding(.horizontal)
+                .onChange(of: viewModel.idea) {
+                    if viewModel.idea.count > 200 {
+                        viewModel.idea = String(viewModel.idea.prefix(200))
+                    }
                 }
-                
-            }
-            .frame(maxHeight: .infinity, alignment: .top)
-            // MARK: - Hidden Navigation Link (iOS 16+ Approach)
-                .navigationDestination(isPresented: $navigateToResults) {
-                    NameListView(viewModel: viewModel)
-                }
-
-        }
-    }
-    
-    // MARK: - Function to Generate Names
-    private func generateNames() async {
-        guard !businessIdea.isEmpty else { return }
-        isLoading = true
-        await viewModel.fetchBusinessNames()
-        isLoading = false
-        navigateToResults = true
-    }
-    private struct GenerateButton: View {
-        let action: () -> Void
-        
-        var body: some View {
-            Button(action: action) {
-                Text("Generate Names")
-                    .font(.headline)
+            
+            Text("\(viewModel.idea.count)/200")
+                .foregroundColor(.gray)
+                .font(.caption)
+            
+            Spacer()
+            
+            NavigationLink(destination: SelectCategoryView(viewModel: viewModel)) {
+                Text("Next")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.blue)
+                    .background(viewModel.idea.isEmpty ? Color.gray : Color.red)
+                    .cornerRadius(12)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
+                    .padding()
             }
-            .frame(maxHeight: .infinity, alignment: .bottom) // Align button to bottom
-            .padding(.bottom, 20) // Add padding for spacing
+            .disabled(viewModel.idea.isEmpty)
         }
-    }
-    
-    
-    private struct IdeaTextField: View {
-        @Binding var text: String
-        
-        var body: some View {
-            TextField("Describe your business idea...", text: $text,axis : .vertical)
-                .lineLimit(5...7)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.vertical, 10)
-                .disableAutocorrection(true)
-        }
-    }
-    private struct LoadingIndicator: View {
-        var body: some View {
-            ProgressView("Generating...")
-                .padding()
-                .frame(maxHeight: .infinity, alignment: .bottom)
-        }
+        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }
 }
 
 #Preview {
-    IdeaInputView()
+    IdeaInputView(viewModel: BusinessNameViewModel())
 }
+
+#Preview {
+    IdeaInputView(viewModel: BusinessNameViewModel())
+}
+

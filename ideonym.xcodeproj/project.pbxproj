@@ -57,11 +57,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F08BE0652D4F4E8500CB0714 /* Views */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Views;
-			sourceTree = "<group>";
-		};
 		F08BE0792D4F589C00CB0714 /* Preview Content */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Preview Content";
@@ -70,6 +65,11 @@
 		F08BE07D2D4F595D00CB0714 /* components */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = components;
+			sourceTree = "<group>";
+		};
+		F08BE08C2D4FBE8C00CB0714 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -122,7 +122,7 @@
 		F08BE07B2D4F590100CB0714 /* Ideonym */ = {
 			isa = PBXGroup;
 			children = (
-				F08BE0652D4F4E8500CB0714 /* Views */,
+				F08BE08C2D4FBE8C00CB0714 /* Views */,
 				F08BE0632D4F4E7600CB0714 /* Models */,
 				F08BE0622D4F4E7200CB0714 /* View Models */,
 				F08BE0792D4F589C00CB0714 /* Preview Content */,
@@ -151,9 +151,9 @@
 			fileSystemSynchronizedGroups = (
 				F08BE0622D4F4E7200CB0714 /* View Models */,
 				F08BE0632D4F4E7600CB0714 /* Models */,
-				F08BE0652D4F4E8500CB0714 /* Views */,
 				F08BE0792D4F589C00CB0714 /* Preview Content */,
 				F08BE07D2D4F595D00CB0714 /* components */,
+				F08BE08C2D4FBE8C00CB0714 /* Views */,
 			);
 			name = ideonym;
 			packageProductDependencies = (

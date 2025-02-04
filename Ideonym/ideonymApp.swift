@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct ideonymApp: App {
+    @StateObject var viewModel = BusinessNameViewModel()
     var body: some Scene {
         WindowGroup {
-            IdeaInputView()
+            NavigationView {
+                IdeaInputView(viewModel: viewModel)
+            }
         }
     }
 }
