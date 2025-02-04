@@ -11,14 +11,21 @@ struct NameListView: View {
 
     var body: some View {
         VStack {
+            // Progress view or error messages
             if viewModel.isLoading {
                 ProgressView("Generating...")
                     .foregroundColor(.white)
+                    .scaleEffect(1.5) // Optional: Make it larger for emphasis
+                    .padding(.bottom, 20)
             } else if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
-            } else {
+                    .padding(.bottom, 20)
+            }
+
+            // Names list
+            if !viewModel.isLoading {
                 ScrollView {
                     ForEach(viewModel.generatedNames) { name in
                         VStack(alignment: .leading) {
@@ -38,6 +45,7 @@ struct NameListView: View {
                 }
             }
 
+            // Button remains in place but is disabled during loading
             Button(action: {
                 viewModel.isLoading = true
                 viewModel.generateBusinessNames {
@@ -49,11 +57,12 @@ struct NameListView: View {
                 Text("Generate Again")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.red)
+                    .background(viewModel.isLoading ? Color.gray : Color.red)
                     .cornerRadius(12)
                     .foregroundColor(.white)
                     .padding()
             }
+            .disabled(viewModel.isLoading) // Disable the button while loading
         }
         .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }

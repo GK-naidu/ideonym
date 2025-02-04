@@ -34,7 +34,18 @@
 		F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F08BE0432D4F4DAB00CB0714 /* ideonymTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08BE04D2D4F4DAB00CB0714 /* ideonymUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F08BE10B2D52298F00CB0714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Views/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F08BE10F2D522A7A00CB0714 /* Exceptions for "Views" folder in "ideonym" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F08BE0322D4F4DA800CB0714 /* ideonym */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F08BE0462D4F4DAB00CB0714 /* ideonymTests */ = {
@@ -69,6 +80,9 @@
 		};
 		F08BE08C2D4FBE8C00CB0714 /* Views */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F08BE10F2D522A7A00CB0714 /* Exceptions for "Views" folder in "ideonym" target */,
+			);
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -122,6 +136,7 @@
 		F08BE07B2D4F590100CB0714 /* Ideonym */ = {
 			isa = PBXGroup;
 			children = (
+				F08BE10B2D52298F00CB0714 /* Info.plist */,
 				F08BE08C2D4FBE8C00CB0714 /* Views */,
 				F08BE0632D4F4E7600CB0714 /* Models */,
 				F08BE0622D4F4E7200CB0714 /* View Models */,
@@ -368,6 +383,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = /Users/gknaidu/Downloads/_DEV_/ideonym/Ideonym/Views/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -425,6 +442,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = /Users/gknaidu/Downloads/_DEV_/ideonym/Ideonym/Views/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
