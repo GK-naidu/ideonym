@@ -34,18 +34,8 @@
 		F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F08BE0432D4F4DAB00CB0714 /* ideonymTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08BE04D2D4F4DAB00CB0714 /* ideonymUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ideonymUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F08BE10B2D52298F00CB0714 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Views/Info.plist; sourceTree = "<group>"; };
+		F0C5DB582D59E26600A95991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F08BE1102D522D6D00CB0714 /* Exceptions for "Views" folder in "ideonym" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = F08BE0322D4F4DA800CB0714 /* ideonym */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F08BE0622D4F4E7200CB0714 /* View Models */ = {
@@ -70,9 +60,6 @@
 		};
 		F08BE08C2D4FBE8C00CB0714 /* Views */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				F08BE1102D522D6D00CB0714 /* Exceptions for "Views" folder in "ideonym" target */,
-			);
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -124,7 +111,6 @@
 		F08BE07B2D4F590100CB0714 /* Ideonym */ = {
 			isa = PBXGroup;
 			children = (
-				F08BE10B2D52298F00CB0714 /* Info.plist */,
 				F08BE08C2D4FBE8C00CB0714 /* Views */,
 				F08BE0632D4F4E7600CB0714 /* Models */,
 				F08BE0622D4F4E7200CB0714 /* View Models */,
@@ -132,6 +118,7 @@
 				F08BE07D2D4F595D00CB0714 /* components */,
 				F08BE03A2D4F4DAA00CB0714 /* Assets.xcassets */,
 				F08BE0362D4F4DA800CB0714 /* ideonymApp.swift */,
+				F0C5DB582D59E26600A95991 /* Info.plist */,
 			);
 			path = Ideonym;
 			sourceTree = "<group>";
@@ -365,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = /Users/gknaidu/Downloads/_DEV_/ideonym/Ideonym/Views/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Ideonym/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -424,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = /Users/gknaidu/Downloads/_DEV_/ideonym/Ideonym/Views/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Ideonym/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -441,12 +428,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ideonym/Preview Content\"";
 				DEVELOPMENT_TEAM = 767TND7ZLG;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,6 +447,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ideonym.ideonym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -470,12 +459,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ideonym/Preview Content\"";
 				DEVELOPMENT_TEAM = 767TND7ZLG;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -488,6 +478,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ideonym.ideonym;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
