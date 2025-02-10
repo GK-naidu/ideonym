@@ -46,23 +46,24 @@ struct NameListView: View {
             }
 
             // Button remains in place but is disabled during loading
-            Button(action: {
-                viewModel.isLoading = true
-                viewModel.generateBusinessNames {
-                    DispatchQueue.main.async {
-                        viewModel.isLoading = false // Hide progress after fetching names
+            if !viewModel.isLoading {
+                Button(action: {
+                    viewModel.isLoading = true
+                    viewModel.generateBusinessNames {
+                        DispatchQueue.main.async {
+                            viewModel.isLoading = false
+                        }
                     }
+                }) {
+                    Text("Generate Again")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(12)
+                        .foregroundColor(.white)
+                        .padding()
                 }
-            }) {
-                Text("Generate Again")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(viewModel.isLoading ? Color.gray : Color.red)
-                    .cornerRadius(12)
-                    .foregroundColor(.white)
-                    .padding()
             }
-            .disabled(viewModel.isLoading) // Disable the button while loading
         }
         .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }
