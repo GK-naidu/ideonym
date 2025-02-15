@@ -48,9 +48,9 @@ struct NameListView: View {
                     Text("Generate Again")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.red)
+                        .background(Color.white.opacity(0.7))
                         .cornerRadius(12)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.blue)
                         .padding()
                 }
             }

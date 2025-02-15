@@ -33,9 +33,9 @@ struct IdeaInputView: View {
                 Text("Next")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(viewModel.idea.count >= 5 ? Color.red : Color.gray)
+                    .background(viewModel.idea.count >= 5 ? Color.white.opacity(0.7) : Color.gray)
                     .cornerRadius(12)
-                    .foregroundColor(.white)
+                    .foregroundColor(.blue)
                     .padding()
             }
             .disabled(viewModel.idea.count < 5)
