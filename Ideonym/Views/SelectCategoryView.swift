@@ -71,7 +71,7 @@ struct SelectCategoryView: View {
                         ? Color.gray : Color.white.opacity(0.7)
                     )
                     .cornerRadius(12)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.black)
                     .padding()
             }
             .disabled((viewModel.selectedCategory == "Other" && customCategory.isEmpty) || viewModel.selectedCategory.isEmpty)

@@ -73,7 +73,7 @@ struct SelectToneView: View {
                         ? Color.gray : Color.white.opacity(0.7)
                     )
                     .cornerRadius(12)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.black)
                     .padding()
             }
             .disabled((viewModel.selectedTone == "Other" && customTone.isEmpty) || viewModel.selectedTone.isEmpty)

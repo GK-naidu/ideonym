@@ -50,7 +50,7 @@ struct NameListView: View {
                         .padding()
                         .background(Color.white.opacity(0.7))
                         .cornerRadius(12)
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color.black)
                         .padding()
                 }
             }
