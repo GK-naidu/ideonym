@@ -15,7 +15,12 @@ class BusinessNameViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var generatedNames: [BusinessName] = []
-    @Published var errorMessage: String?
+    @Published var errorMessage: String? {
+        didSet {
+            showError = errorMessage != nil // Automatically updates showError
+        }
+    }
+    @Published var showError: Bool = false // ✅ New property for alert handling
 
     // Dynamically read API URL from Info.plist
     private var apiURL: URL {
@@ -35,6 +40,7 @@ class BusinessNameViewModel: ObservableObject {
 
         isLoading = true
         errorMessage = nil
+        showError = false
 
         let requestBody: [String: Any] = [
             "idea": idea,
@@ -54,12 +60,14 @@ class BusinessNameViewModel: ObservableObject {
 
                 if let error = error {
                     self.errorMessage = "Network Error: \(error.localizedDescription)"
+                    self.showError = true
                     completion()
                     return
                 }
 
                 guard let data = data else {
                     self.errorMessage = "No data received from the server."
+                    self.showError = true
                     completion()
                     return
                 }
@@ -70,6 +78,7 @@ class BusinessNameViewModel: ObservableObject {
                     completion()
                 } catch {
                     self.errorMessage = "Failed to decode response: \(error.localizedDescription)"
+                    self.showError = true
                     completion()
                 }
             }

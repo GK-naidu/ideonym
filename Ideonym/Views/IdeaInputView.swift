@@ -9,7 +9,8 @@ import SwiftUI
 
 struct IdeaInputView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
-    
+    let onNext: () -> Void // ✅ Navigation is now controlled from ViewNavigationFlow
+
     var body: some View {
         VStack {
             Text("Enter Your Business Idea")
@@ -25,45 +26,23 @@ struct IdeaInputView: View {
                 .cornerRadius(10)
                 .foregroundColor(.white)
                 .padding(.horizontal)
-                .onChange(of: viewModel.idea) {
-                    // Trim whitespace and enforce character limit
-                    viewModel.idea = viewModel.idea.trimmingCharacters(in: .whitespacesAndNewlines)
-                    if viewModel.idea.count > 200 {
-                        viewModel.idea = String(viewModel.idea.prefix(200))
-                    }
-                }
-
-            // Character count
-            Text("\(viewModel.idea.count)/200")
-                .foregroundColor(.gray)
-                .font(.caption)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.trailing, 20)
 
             Spacer()
 
-            // "Next" Button - Only enabled if input is at least 5 characters (excluding spaces)
-            NavigationLink(destination: SelectCategoryView(viewModel: viewModel)) {
+            Button(action: onNext) { // ✅ Navigation logic moved outside the view
                 Text("Next")
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(isIdeaValid ? Color.red : Color.gray)
+                    .background(viewModel.idea.count >= 5 ? Color.red : Color.gray)
                     .cornerRadius(12)
                     .foregroundColor(.white)
                     .padding()
             }
-            .disabled(!isIdeaValid)
+            .disabled(viewModel.idea.count < 5)
         }
         .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
     }
-
-    /// Computed property: Checks if the input has at least 5 valid characters
-    private var isIdeaValid: Bool {
-        viewModel.idea.trimmingCharacters(in: .whitespacesAndNewlines).count >= 5
-    }
 }
 
-#Preview {
-    IdeaInputView(viewModel: BusinessNameViewModel())
-}
+
 

@@ -9,15 +9,16 @@ import SwiftUI
 
 struct SelectCategoryView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
-    
+    let onNext: () -> Void // ✅ Now controlled externally
+
     let categories = ["Tech", "Business", "Fashion", "Health", "Gaming", "Other"]
-    
+
     var body: some View {
         VStack {
             Text("Select a Category")
                 .font(.title2)
                 .foregroundColor(.white)
-            
+
             VStack {
                 ForEach(categories, id: \.self) { category in
                     Button(action: { viewModel.selectedCategory = category }) {
@@ -37,10 +38,10 @@ struct SelectCategoryView: View {
                 }
             }
             .padding()
-            
+
             Spacer()
-            
-            NavigationLink(destination: SelectToneView(viewModel: viewModel)) {
+
+            Button(action: onNext) { // ✅ Navigation logic moved outside the view
                 Text("Next")
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -55,6 +56,3 @@ struct SelectCategoryView: View {
     }
 }
 
-#Preview {
-    SelectCategoryView(viewModel: BusinessNameViewModel())
-}
