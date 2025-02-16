@@ -55,7 +55,7 @@ struct NameListView: View {
                 }
             }
         }
-        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        .background(AnimatedMeshGradient())
     }
 }
 

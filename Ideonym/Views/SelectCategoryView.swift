@@ -77,7 +77,7 @@ struct SelectCategoryView: View {
             .disabled((viewModel.selectedCategory == "Other" && customCategory.isEmpty) || viewModel.selectedCategory.isEmpty)
             .padding()
         }
-        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        .background(AnimatedMeshGradient())
     }
 }
 

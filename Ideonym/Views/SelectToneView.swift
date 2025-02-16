@@ -79,7 +79,7 @@ struct SelectToneView: View {
             .disabled((viewModel.selectedTone == "Other" && customTone.isEmpty) || viewModel.selectedTone.isEmpty)
             .padding()
         }
-        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        .background(AnimatedMeshGradient())
     }
 }
 

@@ -40,7 +40,7 @@ struct IdeaInputView: View {
             }
             .disabled(viewModel.idea.count < 5)
         }
-        .background(LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
+        .background(AnimatedMeshGradient())
     }
 }
 
