@@ -14,8 +14,8 @@ struct ViewNavigationFlow: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(colors: [.black, .purple], startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
+            AnimatedMeshGradient()
+                .ignoresSafeArea()
 
             if viewModel.isLoading {
                 GeneratingProgressView()

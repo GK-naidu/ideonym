@@ -9,16 +9,19 @@ import SwiftUI
 
 struct SelectCategoryView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
-    let onNext: () -> Void // ✅ Now controlled externally
+    let onNext: () -> Void
     @FocusState private var isTextFieldFocused: Bool
     let categories = ["Tech", "Business", "Fashion", "Health", "Gaming", "Other"]
     @State private var customCategory: String = ""
+
     var body: some View {
         VStack {
+            Spacer(minLength: isTextFieldFocused ? 0 : 40) // Ensure spacing when keyboard is hidden
+            
             Text("Select a Category")
                 .font(.title2)
                 .foregroundColor(.white)
-
+            
             VStack {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
@@ -27,6 +30,7 @@ struct SelectCategoryView: View {
                             isTextFieldFocused = true
                         } else {
                             customCategory = ""
+                            isTextFieldFocused = false
                         }
                     }) {
                         HStack {
@@ -42,7 +46,6 @@ struct SelectCategoryView: View {
                     }
                 }
 
-                // ✅ Show TextField only when "Other" is selected
                 if viewModel.selectedCategory == "Other" {
                     TextField("Enter custom category...", text: $customCategory)
                         .focused($isTextFieldFocused)
@@ -56,7 +59,7 @@ struct SelectCategoryView: View {
                 }
             }
             .padding()
-
+            
             Spacer()
 
             Button(action: {
@@ -75,9 +78,16 @@ struct SelectCategoryView: View {
                     .padding()
             }
             .disabled((viewModel.selectedCategory == "Other" && customCategory.isEmpty) || viewModel.selectedCategory.isEmpty)
-            .padding()
+            .safeAreaInset(edge: .bottom) { // New Modern Approach
+                Color.clear.frame(height: isTextFieldFocused ? 20 : 0) // Add spacing only when keyboard is active
+            }
         }
-        .background(AnimatedMeshGradient())
+        .background(Color.clear)
+        .onChange(of: isTextFieldFocused) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                // Adjust layout dynamically
+            }
+        }
     }
 }
 
