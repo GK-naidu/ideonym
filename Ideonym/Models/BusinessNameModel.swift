@@ -12,18 +12,39 @@ struct GeneratedNameModel: Decodable {
     var names: [BusinessName]
     var Preferences: [Preference]
 
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.names = try container.decode([BusinessName].self, forKey: .names)
+        self.Preferences = try container.decodeIfPresent([Preference].self, forKey: .Preferences) ?? []
+
+        if let firstPreference = self.Preferences.first {
+            let category = firstPreference.category
+            let tone = firstPreference.Tone
+
+            for i in 0..<self.names.count {
+                // ✅ Assign only Category & Tone as tags
+                self.names[i].tags = [category, tone]
+            }
+        }
+    }
+
     enum CodingKeys: String, CodingKey {
         case names
-        case Preferences = "Preferences" // Case-sensitive match
+        case Preferences = "Preferences"
     }
 }
 
 struct BusinessName: Decodable, Identifiable {
-    var id: UUID = UUID() // Automatically generated
+    var id: UUID = UUID()
     var name: String
     var tagline: String
+    var tags: [String]?
 
-    // Exclude `id` from decoding
+    // ✅ Ensures tags always have a value (Prevents nil errors)
+    var safeTags: [String] {
+        return tags ?? ["General", "Creative"]
+    }
+
     private enum CodingKeys: String, CodingKey {
         case name, tagline
     }

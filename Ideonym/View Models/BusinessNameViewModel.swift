@@ -75,6 +75,11 @@ class BusinessNameViewModel: ObservableObject {
                     return
                 }
 
+                // ✅ Debug: Print the full JSON response
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("📩 Raw JSON Response: \(jsonString)")
+                }
+
                 do {
                     let decodedResponse = try JSONDecoder().decode(GeneratedNameModel.self, from: data)
                     self.generatedNames = decodedResponse.names
