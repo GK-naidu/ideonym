@@ -66,22 +66,14 @@ struct SelectableListView: View {
                                     TextField("Enter custom \(title.lowercased())...", text: $customInput)
                                         .focused($isTextFieldFocused)
                                         .padding()
-                                        .frame(maxWidth: min(geometry.size.width - 40, 600)) // ✅ Keeps input box reasonable
+                                        .frame(maxWidth: min(geometry.size.width - 40, 600))
                                         .background(Color.white.opacity(0.9))
                                         .cornerRadius(10)
                                         .foregroundColor(.blue)
                                         .padding(.top, 10)
                                         .transition(.opacity)
                                         .animation(.easeInOut, value: selectedOption)
-                                        .toolbar { // ✅ Fixes keyboard toolbar issue
-                                            ToolbarItemGroup(placement: .keyboard) {
-                                                Spacer()
-                                                Button("Done") {
-                                                    isTextFieldFocused = false
-                                                }
-                                                .foregroundColor(.blue)
-                                            }
-                                        }
+                                        .submitLabel(.done)
                                 }
                             }
                             .padding(.horizontal, 20)
@@ -90,26 +82,6 @@ struct SelectableListView: View {
                         .padding(.bottom, 100) // ✅ Prevents clipping when scrolling
                     }
                     .scrollDismissesKeyboard(.interactively)
-
-                    Spacer()
-
-                    // ✅ Next Button (Fixed at Bottom)
-                    Button(action: {
-                        selectedOption = (selectedOption == "Other") ? customInput : selectedOption
-                        onNext()
-                    }) {
-                        Text("Next")
-                            .frame(maxWidth: min(geometry.size.width - 40, 600)) // ✅ Controls width on iPad
-                            .padding()
-                            .background(
-                                (selectedOption == "Other" && customInput.isEmpty) || selectedOption.isEmpty
-                                ? Color.gray : Color.white.opacity(0.7)
-                            )
-                            .cornerRadius(12)
-                            .foregroundColor(.black)
-                    }
-                    .padding(.bottom, max(geometry.safeAreaInsets.bottom, 20)) // ✅ Keeps it properly positioned
-                    .disabled((selectedOption == "Other" && customInput.isEmpty) || selectedOption.isEmpty)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center) // ✅ Ensures full-screen scaling
             }

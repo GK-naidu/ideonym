@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IdeaInputView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
-    let onNext: () -> Void // ✅ Navigation is now controlled from ViewNavigationFlow
+    let onNext: () -> Void
     @FocusState private var isTextFieldFocused: Bool // ✅ Auto-focus text field
 
     var body: some View {
@@ -54,17 +54,6 @@ struct IdeaInputView: View {
                             }
                         }
 
-                    // ✅ Next Button
-                    Button(action: onNext) {
-                        Text("Next")
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(viewModel.idea.count >= 5 ? Color.white.opacity(0.9) : Color.gray)
-                            .cornerRadius(12)
-                            .foregroundColor(.black)
-                    }
-                    .padding(.all, 20)
-                    .disabled(viewModel.idea.count < 5)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
