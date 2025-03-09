@@ -22,6 +22,7 @@ class BusinessNameViewModel: ObservableObject {
             showError = errorMessage != nil // Automatically updates showError
         }
     }
+    @Published var hasWatchedAdForCurrentBatch: Bool = false
     @Published var showAlert: Bool = false
     @Published var alertMessage: String = ""
     @Published var renderedImage: UIImage?
@@ -53,6 +54,7 @@ class BusinessNameViewModel: ObservableObject {
         }
 
         isLoading = true
+        hasWatchedAdForCurrentBatch = false
         errorMessage = nil
         showError = false
 

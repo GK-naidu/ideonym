@@ -11,44 +11,50 @@ struct NameListView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
     @EnvironmentObject var navigationManager: NavigationManager
 
-    @State private var isUnlocked = false // 🔓 Unlocks after ad watch
-
     var body: some View {
         ZStack {
-            // ✅ Background Gradient
             AnimatedMeshGradient()
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
-                // ✅ Title
                 Text("Generated Names")
                     .font(.title)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
 
-                if isUnlocked {
-                    // ✅ Unlocked: Show Name Cards
+                if viewModel.hasWatchedAdForCurrentBatch {
                     ScrollView {
-                        ForEach(viewModel.generatedNames) { name in
-                            Button(action: {
-                                viewModel.selectedBusinessName = name
-                                navigationManager.navigateToStep(.nameInfo)
-                            }) {
-                                NameListCard(name: name)
+                        VStack(spacing: 16) {
+                            ForEach(viewModel.generatedNames) { name in
+                                Button(action: {
+                                    viewModel.selectedBusinessName = name
+                                    navigationManager.navigateToStep(.nameInfo)
+                                }) {
+                                    NameListCard(name: name)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .padding(.horizontal, 16)
                             }
-                            .buttonStyle(PlainButtonStyle()) // Removes default button style
-                            .padding(.horizontal, 16)
+
+                            // ✅ Generate More Names Button (Only visible after unlock)
+                            Button(action: {
+                                viewModel.generateBusinessNames {}
+                            }) {
+                                Text("Generate More Names")
+                                    .frame(width: 250, height: 50)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.top, 20)
                         }
                     }
                 } else {
-                    // ✅ Locked: Show Blurred Overlay
                     BlurredOverlay()
                         .padding(.horizontal, 16)
                 }
             }
 
-            // ✅ Watch Ad Button Centered Properly
-            if !isUnlocked {
+            // ✅ Show Watch Ad Button Only When Needed
+            if !viewModel.hasWatchedAdForCurrentBatch && !viewModel.generatedNames.isEmpty {
                 VStack {
                     Button(action: {
                         watchAdToUnlock()
@@ -57,9 +63,9 @@ struct NameListView: View {
                             Text("Watch Ad")
                                 .font(.headline)
                                 .fontWeight(.bold)
-                            Image(systemName: "play.fill") // ▶️ Icon
+                            Image(systemName: "play.fill")
                         }
-                        .frame(width: 200, height: 50)
+                        .frame(width: 300, height: 70)
                         .background(Color.black.opacity(0.8))
                         .foregroundColor(.white)
                         .cornerRadius(12)
@@ -70,16 +76,16 @@ struct NameListView: View {
                         .foregroundColor(.white.opacity(0.7))
                         .padding(.top, 4)
                 }
-                .frame(maxHeight: .infinity) // ✅ Perfectly Centers in the Middle
+                .frame(maxHeight: .infinity)
             }
         }
     }
 
-    // ✅ Simulated Ad Watch Function
+    // ✅ Watch Ad Function (Modifies ViewModel)
     func watchAdToUnlock() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             withAnimation {
-                isUnlocked = true
+                viewModel.hasWatchedAdForCurrentBatch = true
             }
         }
     }
