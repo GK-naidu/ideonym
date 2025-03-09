@@ -54,11 +54,16 @@ struct ViewNavigationFlow: View {
         case .selectCategory:
             SelectCategoryView(viewModel: viewModel, onNext: { moveToNextStep() })
         case .selectTone:
-            SelectToneView(viewModel: viewModel, onGenerate: {
-                startGeneratingNames()
-            })
+            SelectToneView(viewModel: viewModel, onNext: { startGeneratingNames() })
         case .nameList:
             NameListView(viewModel: viewModel)
+        case .nameInfo:
+            if let selectedName = viewModel.selectedBusinessName { // ✅ Get selected name
+                NameInfoView(name: selectedName)
+            } else {
+                Text("Error: No Name Selected") // ✅ Handle missing name gracefully
+                    .foregroundColor(.red)
+            }
         }
     }
 
@@ -108,7 +113,7 @@ struct ViewNavigationFlow: View {
             Text("Next")
                 .frame(maxWidth: 300)
                 .padding()
-                .background(Color.white.opacity(0.7))
+                .background(Color.white)
                 .cornerRadius(12)
                 .foregroundColor(.black)
         }
@@ -121,11 +126,12 @@ struct ViewNavigationFlow: View {
             navigationManager.currentStep == .ideaInput ||
             navigationManager.currentStep == .selectCategory ||
             navigationManager.currentStep == .selectTone
+           
         )
     }
 
     private func shouldShowBackButton() -> Bool {
-        return !viewModel.isLoading && (navigationManager.currentStep == .selectCategory || navigationManager.currentStep == .selectTone)
+        return !viewModel.isLoading && (navigationManager.currentStep == .selectCategory || navigationManager.currentStep == .selectTone ||  navigationManager.currentStep == .nameInfo)
     }
 
     private func shouldShowCloseButton() -> Bool {

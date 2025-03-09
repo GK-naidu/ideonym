@@ -12,7 +12,7 @@ enum NavigationStep: Int {
     case selectCategory
     case selectTone
     case nameList
-
+    case nameInfo
     // Button text for each step
     var buttonText: String {
         switch self {
@@ -20,6 +20,8 @@ enum NavigationStep: Int {
             return "Next"
         case .nameList:
             return "Finish"
+        case .nameInfo:
+            return "Back"
         }
     }
 
@@ -30,6 +32,8 @@ enum NavigationStep: Int {
             return .move(edge: .trailing)
         case .nameList:
             return .move(edge: .leading)
+        case .nameInfo: 
+            return .opacity
         }
     }
 }

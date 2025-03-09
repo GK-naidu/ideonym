@@ -36,19 +36,19 @@ struct IdeaInputView: View {
                         .background(Color.white.opacity(0.1))
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.5), lineWidth: 1) // ✅ Visible Outline
+                                .stroke(Color.white.opacity(0.5), lineWidth: 1) 
                         )
-                        .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 4) // ✅ Drop Shadow
+                        .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 4)
                         .cornerRadius(12)
                         .foregroundColor(.white)
-                        .focused($isTextFieldFocused) // ✅ Focus Control
-                        .frame(height: 120) // ✅ Fixed height for text field
+                        .focused($isTextFieldFocused)
+                        .frame(height: 120)
                         .padding(.horizontal, 20)
-                        .toolbar { // ✅ Keyboard Toolbar
+                        .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
-                                Spacer() // Pushes the button to the right
+                                Spacer()
                                 Button("Done") {
-                                    isTextFieldFocused = false // ✅ Dismiss keyboard
+                                    isTextFieldFocused = false
                                 }
                                 .foregroundColor(.blue)
                             }
@@ -57,11 +57,7 @@ struct IdeaInputView: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
             }
-            .task {
-                // ✅ Auto-focus Text Field After 2 Seconds
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-                isTextFieldFocused = true
-            }
+            
         }
     }
 }

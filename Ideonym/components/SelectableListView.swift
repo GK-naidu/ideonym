@@ -10,80 +10,75 @@ import SwiftUI
 struct SelectableListView: View {
     let title: String
     let options: [String]
+    let icons: [String] // ✅ Add icons for each option (Make sure these match asset names)
     @Binding var selectedOption: String
-    @FocusState private var isTextFieldFocused: Bool
     let onNext: () -> Void
-
-    @State private var customInput: String = ""
-
+    
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                // ✅ Fullscreen Background for All Devices
-                AnimatedMeshGradient()
-                    .edgesIgnoringSafeArea(.all)
-
-                VStack {
-                    ScrollView {
-                        VStack(alignment: .center, spacing: 12) {
-                            // ✅ Title
-                            Text(title)
-                                .font(.title2)
-                                .foregroundColor(.white)
-                                .padding(.top, 40)
-                                .frame(maxWidth: 600, alignment: .center) // ✅ Keeps title width controlled
-
-                            // ✅ Options List
-                            VStack(spacing: 12) {
-                                ForEach(options, id: \.self) { option in
-                                    Button(action: {
-                                        selectedOption = option
-                                        if option == "Other" {
-                                            isTextFieldFocused = true
-                                        } else {
-                                            customInput = ""
-                                            isTextFieldFocused = false
-                                        }
-                                    }) {
-                                        HStack {
-                                            Text(option)
-                                                .foregroundColor(.white)
-                                            Spacer()
-                                            if selectedOption == option {
-                                                Image(systemName: "checkmark.circle.fill")
-                                                    .foregroundColor(.red)
+        ZStack {
+            // ✅ Fullscreen Background Gradient
+            AnimatedMeshGradient()
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 20) {
+                // ✅ Title
+                Text(title)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                // ✅ Scrollable Options Grid
+                ScrollView {
+                    VStack(spacing: 16) {
+                        let cardSize = (UIScreen.main.bounds.width - 64) / 2 // Adjust card size dynamically
+                        
+                        ForEach(0..<options.count / 2, id: \.self) { rowIndex in
+                            HStack(spacing: 16) {
+                                ForEach(0..<2, id: \.self) { columnIndex in
+                                    let index = rowIndex * 2 + columnIndex
+                                    if index < options.count {
+                                        Button(action: {
+                                            selectedOption = options[index]
+                                        }) {
+                                            VStack(spacing: 10) {
+                                                Image(icons[index]) // ✅ Load icon from assets
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 50, height: 50) // Icon size
+                                                
+                                                VStack {
+                                                    let parts = options[index].split(separator: "&").map { String($0) }
+                                                    if parts.count == 2 {
+                                                        Text(parts[0])
+                                                            .font(.headline)
+                                                            .foregroundColor(.white)
+                                                        Text("&")
+                                                            .font(.headline)
+                                                            .foregroundColor(.gray.opacity(0.8))
+                                                        Text(parts[1])
+                                                            .font(.headline)
+                                                            .foregroundColor(.white)
+                                                    } else {
+                                                        Text(options[index]) // Fallback for single-word options
+                                                            .font(.headline)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                }
                                             }
+                                            .frame(width: cardSize, height: cardSize)
+                                            .background(selectedOption == options[index] ? Color.purple.opacity(0.7) : Color.white.opacity(0.1))
+                                            .cornerRadius(20)
+                                            .shadow(color: selectedOption == options[index] ? Color.purple.opacity(0.6) : Color.clear, radius: 8)
                                         }
-                                        .padding()
-                                        .frame(maxWidth: min(geometry.size.width - 40, 600)) // ✅ Prevents stretching on iPad
-                                        .background(Color.white.opacity(0.1))
-                                        .cornerRadius(10)
                                     }
                                 }
-
-                                // ✅ TextField for Custom Input
-                                if selectedOption == "Other" {
-                                    TextField("Enter custom \(title.lowercased())...", text: $customInput)
-                                        .focused($isTextFieldFocused)
-                                        .padding()
-                                        .frame(maxWidth: min(geometry.size.width - 40, 600))
-                                        .background(Color.white.opacity(0.9))
-                                        .cornerRadius(10)
-                                        .foregroundColor(.blue)
-                                        .padding(.top, 10)
-                                        .transition(.opacity)
-                                        .animation(.easeInOut, value: selectedOption)
-                                        .submitLabel(.done)
-                                }
                             }
-                            .padding(.horizontal, 20)
                         }
-                        .frame(maxWidth: 600)
-                        .padding(.bottom, 100) // ✅ Prevents clipping when scrolling
                     }
-                    .scrollDismissesKeyboard(.interactively)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 120)
+                    .scrollIndicators(.never)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center) // ✅ Ensures full-screen scaling
             }
         }
     }
@@ -91,9 +86,16 @@ struct SelectableListView: View {
 
 #Preview {
     SelectableListView(
-        title: "Select a Category",
-        options: ["Tech", "Business", "Fashion", "Health", "Gaming", "Other"],
-        selectedOption: .constant("Tech"), // ✅ Use `.constant()` for @Binding preview
-        onNext: {} // ✅ Provide an empty closure for preview
+        title: "Select a Tone",
+        options: [
+            "Professional & Corporate", "Friendly & Fun", "Innovative & Modern", "Luxury & Premium",
+            "Bold & Strong", "Inspirational & Uplifting", "Minimalist & Elegant", "Playful & Quirky"
+        ],
+        icons: [
+            "icon_professional", "icon_friendly", "icon_innovative", "icon_luxury",
+            "icon_bold", "icon_inspirational", "icon_minimalist", "icon_playful"
+        ],
+        selectedOption: .constant("Professional & Corporate"),
+        onNext: {}
     )
 }

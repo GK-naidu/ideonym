@@ -8,16 +8,39 @@ import SwiftUI
 
 struct SelectToneView: View {
     @ObservedObject var viewModel: BusinessNameViewModel
-    let onGenerate: () -> Void
-
+    let onNext: () -> Void
     var body: some View {
         SelectableListView(
             title: "Select a Tone",
-            options: ["Professional", "Friendly", "Innovative", "Luxury", "Other"],
+            options: [
+                       "Professional",
+                       "Friendly",
+                       "Innovative",
+                       "Premium",
+                       "Bold",
+                       "Inspirational",
+                       "Minimalist",
+                       "Playful",
+                       "Authoritative",
+                       "Conversational",
+                       "Empathetic",
+                       "Humorous",
+                       "Nostalgic",
+                       "Sarcastic",
+                       "Serious",
+                       "Sophisticated",
+                       "Urgent",
+                       "Witty",
+                       "Youthful"
+                   ],
+                   icons: Array(repeating: "", count: 19),
             selectedOption: $viewModel.selectedTone,
-            onNext: onGenerate
+            onNext: {}
         )
     }
 }
 
+#Preview {
+    SelectToneView(viewModel: BusinessNameViewModel(), onNext: {})
+}
 
