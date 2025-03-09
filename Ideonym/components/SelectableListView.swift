@@ -10,68 +10,34 @@ import SwiftUI
 struct SelectableListView: View {
     let title: String
     let options: [String]
-    let icons: [String] // ✅ Add icons for each option (Make sure these match asset names)
+    let icons: [String]
     @Binding var selectedOption: String
     let onNext: () -> Void
-    
+
     var body: some View {
         ZStack {
-            // ✅ Fullscreen Background Gradient
+            // ✅ Fullscreen Animated Gradient Background
             AnimatedMeshGradient()
                 .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 20) {
-                // ✅ Title
+
+            VStack(spacing: 16) {
+                // ✅ Title with Consistent Styling
                 Text(title)
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                
+
                 // ✅ Scrollable Options Grid
                 ScrollView {
-                    VStack(spacing: 16) {
-                        let cardSize = (UIScreen.main.bounds.width - 64) / 2 // Adjust card size dynamically
-                        
-                        ForEach(0..<options.count / 2, id: \.self) { rowIndex in
-                            HStack(spacing: 16) {
-                                ForEach(0..<2, id: \.self) { columnIndex in
-                                    let index = rowIndex * 2 + columnIndex
-                                    if index < options.count {
-                                        Button(action: {
-                                            selectedOption = options[index]
-                                        }) {
-                                            VStack(spacing: 10) {
-                                                Image(icons[index]) // ✅ Load icon from assets
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 50, height: 50) // Icon size
-                                                
-                                                VStack {
-                                                    let parts = options[index].split(separator: "&").map { String($0) }
-                                                    if parts.count == 2 {
-                                                        Text(parts[0])
-                                                            .font(.headline)
-                                                            .foregroundColor(.white)
-                                                        Text("&")
-                                                            .font(.headline)
-                                                            .foregroundColor(.gray.opacity(0.8))
-                                                        Text(parts[1])
-                                                            .font(.headline)
-                                                            .foregroundColor(.white)
-                                                    } else {
-                                                        Text(options[index]) // Fallback for single-word options
-                                                            .font(.headline)
-                                                            .foregroundColor(.white)
-                                                    }
-                                                }
-                                            }
-                                            .frame(width: cardSize, height: cardSize)
-                                            .background(selectedOption == options[index] ? Color.purple.opacity(0.7) : Color.white.opacity(0.1))
-                                            .cornerRadius(20)
-                                            .shadow(color: selectedOption == options[index] ? Color.purple.opacity(0.6) : Color.clear, radius: 8)
-                                        }
-                                    }
-                                }
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 14), count: 2), spacing: 14) {
+                        ForEach(options.indices, id: \.self) { index in
+                            OptionCard(
+                                title: options[index],
+                                iconName: icons[index],
+                                isSelected: selectedOption == options[index]
+                            )
+                            .onTapGesture {
+                                selectedOption = options[index]
                             }
                         }
                     }
@@ -84,6 +50,48 @@ struct SelectableListView: View {
     }
 }
 
+// ✅ **Refined Option Card Component**
+struct OptionCard: View {
+    let title: String
+    let iconName: String
+    let isSelected: Bool
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(iconName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 50, height: 50)
+                .padding(.top, 10)
+
+            Text(title)
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 8)
+        }
+        .frame(width: 150, height: 150)
+        .background(Color.black.opacity(isSelected ? 0.3 : 0.15))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    isSelected ? AnyShapeStyle(
+                        LinearGradient(
+                            colors: [Color.cyan, Color.blue, Color.purple],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    ) : AnyShapeStyle(Color.white.opacity(0.2)),
+                    lineWidth: isSelected ? 3 : 1
+                )
+                .blur(radius: isSelected ? 1.5 : 0)
+        )
+        .shadow(color: isSelected ? Color.cyan.opacity(0.5) : Color.clear, radius: 10)
+    }
+}
+
+// ✅ **Preview**
 #Preview {
     SelectableListView(
         title: "Select a Tone",
