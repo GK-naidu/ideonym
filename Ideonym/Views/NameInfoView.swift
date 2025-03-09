@@ -18,7 +18,10 @@ struct NameInfoView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
+                
                 NameCardView(name: name, isCompact: false)
+                    .padding()
+                    .frame(maxHeight: 300)
 
                 // ✅ Action Buttons (Save, Share, Copy, Like) - Proper Sizing
                 HStack(spacing: 12) {
@@ -47,7 +50,7 @@ struct NameInfoView: View {
                 }
                 .padding(.horizontal, 20)
 
-                Spacer()
+                
 
                 // ✅ Domain Availability Button (Rounded)
                 Button(action: {
