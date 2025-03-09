@@ -66,7 +66,8 @@ struct NameListView: View {
                             Image(systemName: "play.fill")
                         }
                         .frame(width: 300, height: 70)
-                        .background(Color.black.opacity(0.8))
+                        .background(Color.black)
+                        .modifier(MeshGradientOutlineModifier())
                         .foregroundColor(.white)
                         .cornerRadius(12)
                     }
@@ -98,7 +99,6 @@ private struct BlurredOverlay: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.black.opacity(0.3))
                 .blur(radius: 10)
-                .frame(height: 200)
 
    
         }
@@ -112,11 +112,11 @@ private struct NameListCard: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white.opacity(0.1)) // ✅ Frosted Glass Effect
+                .fill(Color.black.opacity(0.2)) // ✅ Frosted Glass Effect
                 .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        .blur(radius: 10)
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white, lineWidth: 1)
+                        .blur(radius: 8)
                 )
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
 
@@ -137,11 +137,7 @@ private struct NameListCard: View {
             }
             .padding()
 
-            // ✅ Chevron Icon (Navigation Indicator)
-            Image(systemName: "chevron.right")
-                .font(.title2)
-                .foregroundColor(.white.opacity(0.6))
-                .padding()
+
         }
         .frame(height: 100) // Keeps cards consistent
     }
