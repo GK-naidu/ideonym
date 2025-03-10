@@ -36,7 +36,7 @@ struct IdeaInputView: View {
                         .background(Color.white.opacity(0.1))
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.white.opacity(0.5), lineWidth: 1) 
+                                .stroke(Color.white.opacity(0.9), lineWidth: 1)
                         )
                         .shadow(color: Color.black.opacity(0.3), radius: 6, x: 0, y: 4)
                         .cornerRadius(12)
@@ -63,4 +63,6 @@ struct IdeaInputView: View {
 }
 
 
-
+#Preview {
+    IdeaInputView(viewModel: BusinessNameViewModel(), onNext: {})
+}

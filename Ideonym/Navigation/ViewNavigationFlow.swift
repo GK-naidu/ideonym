@@ -67,20 +67,27 @@ struct ViewNavigationFlow: View {
         }
     }
 
-    // MARK: - Start Generating Names (Fix)
+    // MARK: - Start Generating Names with Minimum 3s Progress View
     private func startGeneratingNames() {
-        print("🚀 Generating names started...") // ✅ Debug log
+        print("🚀 Generating names started...") //  Debug log
         DispatchQueue.main.async {
-            viewModel.isLoading = true // ✅ Show progress view immediately
+            viewModel.isLoading = true //  Show progress view immediately
+
+            let startTime = Date() // Track start time
 
             viewModel.generateBusinessNames {
                 DispatchQueue.main.async {
-                    viewModel.isLoading = false // ✅ Hide progress view once done
-                    if !viewModel.generatedNames.isEmpty {
-                        print("✅ Names generated, moving to NameListView") // ✅ Debug log
-                        navigationManager.navigateToStep(.nameList)
-                    } else {
-                        print("❌ No names were generated") // ✅ Debug log
+                    let elapsedTime = Date().timeIntervalSince(startTime)
+                    let remainingTime = max(3 - elapsedTime, 0) // Ensure a minimum 3s delay
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + remainingTime) {
+                        viewModel.isLoading = false // ✅ Hide progress view after 3s
+                        if !viewModel.generatedNames.isEmpty {
+                            print("✅ Names generated, moving to NameListView") // ✅ Debug log
+                            navigationManager.navigateToStep(.nameList)
+                        } else {
+                            print("❌ No names were generated") // ✅ Debug log
+                        }
                     }
                 }
             }

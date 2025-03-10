@@ -22,6 +22,7 @@ struct SelectableListView: View {
 
             VStack(spacing: 16) {
                 // ✅ Title with Consistent Styling
+                Spacer().frame(height: 20)
                 Text(title)
                     .font(.title2)
                     .fontWeight(.bold)

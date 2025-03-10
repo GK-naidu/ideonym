@@ -17,6 +17,7 @@ struct NameListView: View {
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
+                Spacer().frame(height: 20)
                 Text("Generated Names")
                     .font(.title)
                     .fontWeight(.bold)
@@ -45,7 +46,7 @@ struct NameListView: View {
                                     .foregroundColor(.white)
                             }
                             .padding(.top, 20)
-                        }
+                        }.padding()
                     }
                 } else {
                     BlurredOverlay()
@@ -116,9 +117,9 @@ private struct NameListCard: View {
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(Color.white, lineWidth: 1)
-                        .blur(radius: 8)
+                        
                 )
-                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 4)
+          
 
             VStack(alignment: .leading, spacing: 6) {
                 Text(name.name)
